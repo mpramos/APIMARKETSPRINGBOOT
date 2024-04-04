@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.IdGeneratorType;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "compras")
@@ -25,6 +26,29 @@ public class Compra {
     private String comentario;
 
     private String estado;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente",insertable = false,updatable = false)
+    private Cliente cliente;
+
+    @OneToMany(mappedBy = "compra")
+    private List<CompraProducto> compras;
+
+
+    public List<CompraProducto> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<CompraProducto> compras) {
+        this.compras = compras;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public Integer getIdVCompra() {
         return idVCompra;

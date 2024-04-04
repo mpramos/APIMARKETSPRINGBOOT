@@ -2,6 +2,8 @@ package com.example.practica1.persistence.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "clientes")
 public class Cliente {
@@ -14,6 +16,16 @@ public class Cliente {
 
     @Column(name = "correo_electronico")
     private String correoElectronico;
+    @OneToMany(mappedBy = "cliente")
+    private List<Compra> compra;
+
+    public List<Compra> getCompra() {
+        return compra;
+    }
+
+    public void setCompra(List<Compra> compra) {
+        this.compra = compra;
+    }
 
     public Integer getId() {
         return id;
